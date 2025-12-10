@@ -2,8 +2,8 @@ services:
 
   ppch:
     build: .
-    container_name: ppch
-    restart: unless-stopped
+    container_name: ${PPCH_CONTAINER_NAME:-ppch}
+    restart: ${PPCH_RESTART_POLICY:-unless-stopped}
     ports:
       - '${PPCH_PORT:-8890}:8000'
     environment:
@@ -13,13 +13,13 @@ services:
       - DEBUG=${DEBUG:-false}
       - TZ=${TZ:-UTC}
     networks:
-      - jitsi
+      - ${PPCH_NETWORK_INTERNAL:-jitsi}
     healthcheck:
       test: ["CMD", "python", "-c", "import httpx; httpx.get('http://localhost:8000/health', timeout=5.0)"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
+      interval: ${PPCH_HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${PPCH_HEALTHCHECK_TIMEOUT:-5s}
+      retries: ${PPCH_HEALTHCHECK_RETRIES:-3}
+      start_period: ${PPCH_HEALTHCHECK_START_PERIOD:-10s}
     labels:
       service: "ppch"
       description: "Prosody Participant Count Hook API"
@@ -27,5 +27,5 @@ services:
 networks:
   jitsi:
     external: true
-    name: jitsi_meet.jitsi
+    name: ${PPCH_NETWORK_EXTERNAL:-jitsi_meet.jitsi}
 

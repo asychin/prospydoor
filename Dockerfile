@@ -1,7 +1,7 @@
 FROM python:3.11-slim
 
-LABEL maintainer="ProsPyDoor"
-LABEL description="ProsPyDoor - Prosody Python Door for checking Jitsi room participants"
+LABEL maintainer="Prosody Participant Count Hook"
+LABEL description="Prosody Participant Count Hook (PPCH) - Check Jitsi room participants"
 
 # Set working directory
 WORKDIR /app

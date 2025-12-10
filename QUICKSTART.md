@@ -1,14 +1,14 @@
-# 🚀 ProsPyDoor - Quick Start
+# 🚀 Prosody Participant Count Hook (PPCH) - Quick Start
 
 ## Start in 3 Steps
 
 ### 1️⃣ Prosody Module Installation (REQUIRED!)
 
-**ProsPyDoor will NOT work without this module!**
+**PPCH will NOT work without this module!**
 
 ```bash
 # Copy the module to the Prosody directory
-cd prospydoor
+cd ppch
 cp mod_room_participants_api.lua /path/to/jitsi/.jitsi-meet-cfg/prosody/prosody-plugins-custom/
 
 # Add the module to Jitsi .env
@@ -23,12 +23,12 @@ docker logs jitsi-prosody-1 | grep "Room Participants API loaded"
 # Should output: "Room Participants API loaded for MUC domain: muc.meet.yourdomain.com"
 ```
 
-### 2️⃣ ProsPyDoor Configuration
+### 2️⃣ PPCH Configuration
 
 ```bash
-cd prospydoor
+cd ppch
 cp .env.example .env
-nano .env  # Change PROSPYDOOR_API_KEY to your secret key
+nano .env  # Change PPCH_API_KEY to your secret key
 ```
 
 ### 3️⃣ Launch
@@ -82,7 +82,7 @@ If the room is empty:
 ## 🔧 Management Commands
 
 ```bash
-cd prospydoor
+cd ppch
 
 # Logs
 docker compose logs -f

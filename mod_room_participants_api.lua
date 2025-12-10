@@ -1,6 +1,6 @@
 -- mod_room_participants_api.lua
 -- HTTP API модуль для получения информации о участниках MUC комнат
--- Автор: AI Assistant
+-- Проект: Prosody Participant Count Hook (PPCH)
 -- Дата: 2025-11-11
 
 local http = require "net.http.server";

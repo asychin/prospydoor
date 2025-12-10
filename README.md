@@ -1,10 +1,10 @@
-# 🚪 ProsPyDoor - Prosody Python Door
+# 🚪 Prosody Participant Count Hook (PPCH)
 
-**"The Door to Prosody via Python"**
+**"The Hook to Prosody via Python"**
 
 Standalone microservice to check for participants in Jitsi Meet rooms without joining the room itself.
 
-**ProsPyDoor** = **Pros**ody + **Py**thon + **Door** 🐍
+**PPCH** = **P**rosody **P**articipant **C**ount **H**ook 🐍
 
 ---
 
@@ -12,7 +12,7 @@ Standalone microservice to check for participants in Jitsi Meet rooms without jo
 
 ### 1. Prosody Module Installation (REQUIRED!)
 
-**ProsPyDoor requires a specific Prosody module to function.**
+**PPCH requires a specific Prosody module to function.**
 
 Copy the module to the Prosody plugins directory:
 ```bash
@@ -30,11 +30,11 @@ Restart Prosody:
 docker compose restart prosody
 ```
 
-### 2. ProsPyDoor Configuration
+### 2. PPCH Configuration
 
 Copy the example configuration:
 ```bash
-cd prospydoor
+cd ppch
 cp .env.example .env
 ```
 
@@ -44,14 +44,14 @@ nano .env
 ```
 
 **Mandatory changes:**
-- `PROSPYDOOR_API_KEY` - your secret API key
+- `PPCH_API_KEY` - your secret API key
 - `PROSODY_URL` - Prosody URL (usually `http://prosody:5280`)
 - `MUC_DOMAIN` - your MUC domain (e.g., `muc.meet.yourdomain.com`)
 
 ### 3. Launch
 
 ```bash
-cd prospydoor
+cd ppch
 docker compose up -d
 ```
 
@@ -71,7 +71,7 @@ curl -H "X-API-Key: your-api-key" \
 ```json
 {
   "status": "ok",
-  "service": "ProsPyDoor - Prosody Python Door",
+  "service": "Prosody Participant Count Hook",
   "version": "1.0.0",
   "prosody_status": "ok"  // <-- Should be "ok", not "error"!
 }
@@ -82,7 +82,7 @@ curl -H "X-API-Key: your-api-key" \
 ## 📂 Project Structure
 
 ```
-prospydoor/
+ppch/
 ├── docker-compose.yml       # Docker Compose configuration
 ├── .env                     # Settings (create from .env.example)
 ├── .env.example             # Example settings
@@ -102,8 +102,8 @@ prospydoor/
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `PROSPYDOOR_API_KEY` | API Key for authentication | ⚠️ Change me! |
-| `PROSPYDOOR_PORT` | API Port | 8890 |
+| `PPCH_API_KEY` | API Key for authentication | ⚠️ Change me! |
+| `PPCH_PORT` | API Port | 8890 |
 | `PROSODY_URL` | Prosody HTTP API URL | http://docker-jitsi-meet-prosody-1:5280 |
 | `MUC_DOMAIN` | Jitsi MUC Domain | muc.meet.yourdomain.com |
 | `DEBUG` | Debug mode | false |
@@ -115,31 +115,31 @@ prospydoor/
 
 ### Start
 ```bash
-cd prospydoor
+cd ppch
 docker compose up -d
 ```
 
 ### View Logs
 ```bash
-cd prospydoor
+cd ppch
 docker compose logs -f
 ```
 
 ### Restart
 ```bash
-cd prospydoor
+cd ppch
 docker compose restart
 ```
 
 ### Stop
 ```bash
-cd prospydoor
+cd ppch
 docker compose down
 ```
 
 ### Rebuild (after code changes)
 ```bash
-cd prospydoor
+cd ppch
 docker compose up -d --build
 ```
 
@@ -158,7 +158,7 @@ curl http://localhost:8890/health
 ```json
 {
   "status": "ok",
-  "service": "ProsPyDoor - Prosody Python Door",
+  "service": "Prosody Participant Count Hook",
   "version": "1.0.0",
   "prosody_status": "ok"
 }
@@ -263,20 +263,20 @@ echo "Participants in room: $count"
 
 ### Check Container Status
 ```bash
-cd prospydoor
+cd ppch
 docker compose ps
 ```
 
 ### View Logs
 ```bash
-cd prospydoor
+cd ppch
 docker compose logs --tail=100
 ```
 
 ### Check Connection to Prosody
 ```bash
 # Enter the container
-docker exec -it prospydoor sh
+docker exec -it ppch sh
 
 # Check Prosody availability
 curl http://docker-jitsi-meet-prosody-1:5280/room_participants_api/health
@@ -284,7 +284,7 @@ curl http://docker-jitsi-meet-prosody-1:5280/room_participants_api/health
 
 ### Network Issues
 
-If ProsPyDoor cannot connect to Prosody:
+If PPCH cannot connect to Prosody:
 
 1. Ensure the main Jitsi stack is running:
    ```bash
@@ -342,7 +342,7 @@ If ProsPyDoor cannot connect to Prosody:
 
 ## 🔗 Jitsi Integration
 
-ProsPyDoor connects to the existing Jitsi network (`jitsi_meet.jitsi`) and communicates with the Prosody container directly.
+PPCH connects to the existing Jitsi network (`jitsi_meet.jitsi`) and communicates with the Prosody container directly.
 
 **Requirements:**
 1. Main Jitsi stack must be running.
@@ -359,8 +359,8 @@ ProsPyDoor connects to the existing Jitsi network (`jitsi_meet.jitsi`) and commu
 ## 📚 Full Documentation
 
 See main documentation in project root:
-- [../PROSPYDOOR.md](../PROSPYDOOR.md) - Full Documentation
-- [../PROSPYDOOR-QUICKSTART.md](../PROSPYDOOR-QUICKSTART.md) - Quick Start
+- [../PPCH.md](../PPCH.md) - Full Documentation
+- [../PPCH-QUICKSTART.md](../PPCH-QUICKSTART.md) - Quick Start
 
 ---
 
@@ -368,11 +368,11 @@ See main documentation in project root:
 
 **Q: Can I run multiple instances?**
 
-A: Yes, change `PROSPYDOOR_PORT` in `.env` for each instance.
+A: Yes, change `PPCH_PORT` in `.env` for each instance.
 
 **Q: How to change the port?**
 
-A: Change `PROSPYDOOR_PORT=8890` to the desired port in the `.env` file.
+A: Change `PPCH_PORT=8890` to the desired port in the `.env` file.
 
 **Q: API doesn't see rooms with participants**
 

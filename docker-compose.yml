@@ -1,12 +1,13 @@
 services:
-  prospydoor:
+
+  ppch:
     build: .
-    container_name: prospydoor
+    container_name: ppch
     restart: unless-stopped
     ports:
-      - '${PROSPYDOOR_PORT:-8890}:8000'
+      - '${PPCH_PORT:-8890}:8000'
     environment:
-      - API_KEY=${PROSPYDOOR_API_KEY}
+      - API_KEY=${PPCH_API_KEY}
       - PROSODY_URL=${PROSODY_URL:-http://docker-jitsi-meet-prosody-1:5280}
       - MUC_DOMAIN=${MUC_DOMAIN:-muc.meet.yourdomain.com}
       - DEBUG=${DEBUG:-false}
@@ -20,8 +21,8 @@ services:
       retries: 3
       start_period: 10s
     labels:
-      service: "prospydoor"
-      description: "ProsPyDoor - Prosody Python Door API"
+      service: "ppch"
+      description: "Prosody Participant Count Hook API"
 
 networks:
   jitsi:

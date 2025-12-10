@@ -1,5 +1,5 @@
 """
-ProsPyDoor - Prosody Python Door
+Prosody Participant Count Hook (PPCH)
 Microservice to check for participants in Jitsi Meet rooms without joining the room itself.
 """
 from fastapi import FastAPI, Depends, HTTPException, Path
